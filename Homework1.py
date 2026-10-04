@@ -1,80 +1,67 @@
-
 import numpy as np
 
-
-# ---- Problem 1, Part 1: Newton (A1) ----
-# 1. Define the main function f(x)
 def f(x):
-    return x * np.sin(3 * x) - np.exp(x)
+    return x*np.sin(3*x) - np.exp(x)
 
-
-# 2. Define the derivative function df(x)
 def df(x):
-    return np.sin(3 * x) + 3 * x * np.cos(3 * x) - np.exp(x)
+    return np.sin(3*x) + 3*x*np.cos(3*x) - np.exp(x)
 
-
-# 3. Set up the starting values
-x = -1.6  # Our initial guess
-tol = 1e-6  # Tolerance (how close to zero we want to get)
-history = [x]  # A list to keep track of our guesses
-
-# 4. Run the Newton's Method loop
-while abs(f(x)) >= tol:
-    # Newton's formula: next x = current x - ( f(x) / f'(x) )
-    x = x - (f(x) / df(x))
-    history.append(x)  # Save the new guess to our list
-
-# The loop stops once f(x_n) is small enough. Following the PDF's note
-# (check f(x_n), not f(x_{n+1})), x_{n+1} is still computed and saved.
-x = x - (f(x) / df(x))
-history.append(x)
-
-# 5. Convert the final history list into a NumPy array
-A1 = np.array(history)
-newton_iterations = len(history) - 1  # every value after the initial guess is one iteration
-
-print(A1)
-print("Iterations:", newton_iterations)
-print("Approximate root:", A1[-1])
-
-#np.save("engr510-assignments/HW1/A1.npy", A1)
-
-
-# ---- Problem 1, Part 2: Bisection (A2) ----
-# The function whose root we want to find
-def f(x):
-    return x * np.sin(3 * x) - np.exp(x)
-
-# Starting interval
-a = -0.7
-b = -0.4
 tol = 1e-6
 
-# Start with the first midpoint
-mid = (a + b) / 2
-history = [mid]
+#Exercise 1–1: - Newton - A1
+x = -1.6
+xs = [x]
+while abs(f(x)) >= tol:
+    x = x - f(x)/df(x)
+    xs.append(x)
+x = x - f(x)/df(x)  # one extra step since convergence is checked on f(x_n)
+xs.append(x)
 
-# Keep narrowing the interval until f(mid) is close enough to zero
+A1 = np.array(xs)
+n_newton = len(xs) - 1
+
+#Exercise 1–1: - bisection - A2
+a, b = -0.7, -0.4
+mid = (a + b)/2
+mids = [mid]
 while abs(f(mid)) >= tol:
-    if f(a) * f(mid) < 0:
+    if f(a)*f(mid) < 0:
         b = mid
     else:
         a = mid
+    mid = (a + b)/2
+    mids.append(mid)
 
-    mid = (a + b) / 2
-    history.append(mid)
+A2 = np.array(mids)
+n_bisect = len(mids)
 
-# Save all the midpoints as A2
-A2 = np.array(history)
-bisection_iterations = len(history)  # each midpoint is one iteration
+#Exercise 1–1: - part 3 (A3)
+A3 = np.array([n_newton, n_bisect])
 
-print("Bisection guesses:", A2)
-print("Iterations:", bisection_iterations)
-print("Approximate root:", A2[-1])
+#Exercise 1–2:
+A = np.array([[1, 2], [-1, 1]])
+B = np.array([[2, 0], [0, 2]])
+C = np.array([[2, 0, -3], [0, 0, -1]])
+D = np.array([[1, 2], [2, 3], [-1, 0]])
+y = np.array([0, 1])
+z = np.array([1, 2, -1])
 
-#np.save("engr510-assignments/HW1/A2.npy", A2)
+#Exercise 1–2: A4
+A4 = D @ y + z 
 
-# ---- Problem 1, Part 3: Iteration counts (A3) ----
-A3 = np.array([newton_iterations, bisection_iterations])
+#Exercise 1–2: A5
+A5 = A @ B
 
-print("A3:", A3)
+#Exercise 1–2: A6
+A6 = B @ C
+
+#Exercise 1–2: A7
+A7 = C @ D
+
+print(A1)
+print(A2)
+print(A3)
+print(A4)
+print(A5)
+print(A6)
+print(A7)
