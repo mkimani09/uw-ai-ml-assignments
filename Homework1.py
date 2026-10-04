@@ -14,7 +14,7 @@ xs = [x]
 while abs(f(x)) >= tol:
     x = x - f(x)/df(x)
     xs.append(x)
-x = x - f(x)/df(x)  # one extra step since convergence is checked on f(x_n)
+x = x - f(x)/df(x)  
 xs.append(x)
 
 A1 = np.array(xs)
