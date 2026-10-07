@@ -31,7 +31,7 @@ while abs(f(mid)) >= tol:
     mids.append(mid)
 
 A2 = np.array(mids)
-n_bisect = len(mids)
+n_bisect = len(mids) - 1
 
 #Exercise 1–1: - part 3 (A3)
 A3 = np.array([n_newton, n_bisect]).flatten()
