@@ -16,7 +16,7 @@ while abs(f(x)) >= tol:
     xs.append(x)
 
 A1 = np.array(xs)
-n_newton = len(xs)
+n_newton = len(xs) - 1
 
 #Exercise 1–1: - bisection - A2
 a, b = -0.7, -0.4
@@ -34,7 +34,7 @@ A2 = np.array(mids)
 n_bisect = len(mids)
 
 #Exercise 1–1: - part 3 (A3)
-A3 = np.array([n_newton, n_bisect])
+A3 = np.array([n_newton, n_bisect]).flatten()
 
 #Exercise 1–2:
 A = np.array([[1, 2], [-1, 1]])
