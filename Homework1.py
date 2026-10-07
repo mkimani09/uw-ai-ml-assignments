@@ -14,11 +14,9 @@ xs = [x]
 while abs(f(x)) >= tol:
     x = x - f(x)/df(x)
     xs.append(x)
-x = x - f(x)/df(x)  
-xs.append(x)
 
 A1 = np.array(xs)
-n_newton = len(xs) - 1
+n_newton = len(xs)
 
 #Exercise 1–1: - bisection - A2
 a, b = -0.7, -0.4
@@ -47,7 +45,7 @@ y = np.array([0, 1])
 z = np.array([1, 2, -1])
 
 #Exercise 1–2: A4
-A4 = D @ y + z 
+A4 = D @ y + z
 
 #Exercise 1–2: A5
 A5 = A @ B
